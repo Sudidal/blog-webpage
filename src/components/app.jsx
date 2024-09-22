@@ -1,12 +1,10 @@
-import Posts from "./posts/posts.jsx";
 import { Outlet } from "react-router-dom";
 
 function App() {
   return (
     <div>
-      <p>hello</p>
+      <h1>Oxide Blog</h1>
       <Outlet />
-      {/* <Posts /> */}
     </div>
   );
 }
