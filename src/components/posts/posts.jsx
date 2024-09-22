@@ -1,5 +1,5 @@
 import getPosts from "../../../mockPosts.js"
-import PostsList from "./postsList.jsx"
+import PostsList from "./postsList/postsList.jsx"
 
 function Posts() {
   const posts = getPosts()

@@ -14,5 +14,21 @@ const getPosts = (limit) => [
       { content: "agree with everything said" },
     ],
   },
+  {
+    id: 2,
+    title: "important words to say",
+    content: "yeah, this is very important",
+    publishDate: "1 month ago - 2024-8-5",
+    author: {
+      id: 2,
+      username: "oxide",
+      email: "mohammed@gmail.com",
+    },
+    comments: [
+      { content: "never thought of this!" },
+      { content: "can i reach to you?" },
+      { content: "not gonna lie, i made these mistakes" },
+    ],
+  },
 ];
 export default getPosts;
