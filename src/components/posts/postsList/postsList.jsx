@@ -6,7 +6,7 @@ function PostsList({ posts }) {
   return (
     <div className={classes.postsList}>
       {posts.map((post) => {
-        return <PostCard key={post.key} post={post} />;
+        return <PostCard key={post.id} post={post} />;
       })}
     </div>
   );
