@@ -4,6 +4,7 @@ import Posts from "../routes/posts.jsx";
 import AllPosts from "./components/allPosts/allPosts.jsx";
 import PostContent from "./components/postContent/postContent.jsx";
 import Login from "../routes/login.jsx";
+import Register from "../routes/register.jsx";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         path: "login",
         element: <Login />
+      },
+      {
+        path: "register",
+        element: <Register />
       },
       {
         path: "posts",
