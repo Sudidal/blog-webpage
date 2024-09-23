@@ -1,12 +1,8 @@
-import getPosts from "../mockPosts.js"
-import PostsList from "../src/components/postsList/postsList.jsx"
+import { Outlet } from "react-router-dom"
 
 function Posts() {
-  const posts = getPosts()
-  console.log(posts)
-
   return (
-    <PostsList posts={posts}/>
+    <Outlet />
   )
 }
 
