@@ -3,6 +3,7 @@ import App from "./components/app.jsx";
 import Posts from "../routes/posts.jsx";
 import AllPosts from "./components/allPosts/allPosts.jsx";
 import PostContent from "./components/postContent/postContent.jsx";
+import Login from "../routes/login.jsx";
 
 const router = createBrowserRouter([
   {
@@ -12,6 +13,10 @@ const router = createBrowserRouter([
       <h1>Whoops, that&apos;s an ugly error page that i need to change</h1>
     ),
     children: [
+      {
+        path: "login",
+        element: <Login />
+      },
       {
         path: "posts",
         element: <Posts />,
