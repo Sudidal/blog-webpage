@@ -1,15 +1,24 @@
-import { getPost } from "../../../postsAPI.js";
+import { getPost } from "../../../blogAPI.js";
 import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function PostContent() {
+  const [post, setPost] = useState(null);
+
   const params = useParams();
 
-  const post = getPost(params.postId);
+  useEffect(() => {
+    getPost(params.postId).then((res) => {
+      setPost(res);
+    });
+  }, [params.postId]);
 
   return (
-    <div>
-      <p>{post.content}</p> <p>{post.id}</p>
-    </div>
+    post && (
+      <div>
+        <p>{post.content}</p>
+      </div>
+    )
   );
 }
 
