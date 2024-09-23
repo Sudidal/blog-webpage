@@ -26,6 +26,15 @@ class BlogAPI {
     storageManager.setAuthToken(data.jwtToken);
   }
 
+  async getUserInfo() {
+    const res = await fetch(this.#API_URL + "/users/me", {
+      method: "GET",
+      headers: { authorization: this.#getAuthToken() },
+    });
+    const userObj = await res.json();
+    return userObj.user;
+  }
+
   async getAllPosts() {
     const res = await fetch(this.#API_URL + "/posts", {
       headers: { authorization: this.#getAuthToken() },
@@ -46,4 +55,5 @@ class BlogAPI {
 }
 
 const blogApi = new BlogAPI();
+
 export default blogApi;
