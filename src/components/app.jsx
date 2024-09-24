@@ -12,10 +12,9 @@ function App() {
   }, [setUser])
 
   return (
-    user &&
     <div>
       <h1>Oxide Blog</h1>
-      <h5>Welcome, {user.username}</h5>
+      {user && <h5>Welcome, {user.username}</h5>}
       <Outlet />
     </div>
   );

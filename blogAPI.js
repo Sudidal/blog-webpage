@@ -35,6 +35,15 @@ class BlogAPI {
     return userObj.user;
   }
 
+  async isLoggedIn() {
+    const res = await fetch(this.#API_URL + "/users/me", {
+      method: "GET",
+      headers: { authorization: this.#getAuthToken() },
+    });
+    if (res.status === 401) return false;
+    else return true;
+  }
+
   async getAllPosts() {
     const res = await fetch(this.#API_URL + "/posts", {
       headers: { authorization: this.#getAuthToken() },

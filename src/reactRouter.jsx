@@ -5,6 +5,7 @@ import AllPosts from "./components/allPosts/allPosts.jsx";
 import PostContent from "./components/postContent/postContent.jsx";
 import Login from "../routes/login.jsx";
 import Register from "../routes/register.jsx";
+import redirectLogged from "../loaders/redirectLogged.js";
 
 const router = createBrowserRouter([
   {
@@ -16,11 +17,13 @@ const router = createBrowserRouter([
     children: [
       {
         path: "login",
-        element: <Login />
+        element: <Login />,
+        loader: redirectLogged,
       },
       {
         path: "register",
-        element: <Register />
+        element: <Register />,
+        loader: redirectLogged,
       },
       {
         path: "posts",
@@ -28,11 +31,11 @@ const router = createBrowserRouter([
         children: [
           {
             path: "",
-            element: <AllPosts />
+            element: <AllPosts />,
           },
           {
             path: ":postId",
-            element: <PostContent />
+            element: <PostContent />,
           },
         ],
       },
