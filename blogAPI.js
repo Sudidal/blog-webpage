@@ -54,12 +54,22 @@ class BlogAPI {
 
   async getPost(postId) {
     const url = this.#API_URL + "/posts/" + postId;
-    console.log(url);
     const res = await fetch(url, {
       headers: { authorization: this.#getAuthToken() },
     });
     const postsObj = await res.json();
     return postsObj.post;
+  }
+
+  async postComment(content, postId) {
+    await fetch(this.#API_URL + "/posts/" + postId + "/comments", {
+      method: "POST",
+      headers: {
+        authorization: this.#getAuthToken(),
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ content }),
+    });
   }
 }
 
