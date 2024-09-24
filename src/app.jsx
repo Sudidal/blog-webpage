@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
-import blogApi from "../../blogAPI.js";
+import blogApi from "./blogAPI.js";
 
 function App() {
   const [user, setUser] = useState(null)

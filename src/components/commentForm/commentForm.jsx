@@ -1,4 +1,4 @@
-import blogApi from "../../../blogAPI.js"
+import blogApi from "../../blogAPI.js"
 import PropTypes from "prop-types";
 
 function CommentForm({postId}) {

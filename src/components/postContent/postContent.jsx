@@ -1,4 +1,4 @@
-import blogApi from "../../../blogAPI.js";
+import blogApi from "../../blogAPI.js";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import CommentsList from "../commentsList/commentsList.jsx";

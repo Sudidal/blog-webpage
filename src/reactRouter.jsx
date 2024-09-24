@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
-import App from "./components/app.jsx";
-import Posts from "../routes/posts.jsx";
+import App from "./app.jsx";
+import Posts from "./routes/posts.jsx";
 import AllPosts from "./components/allPosts/allPosts.jsx";
 import PostContent from "./components/postContent/postContent.jsx";
-import Login from "../routes/login.jsx";
-import Register from "../routes/register.jsx";
-import redirectLogged from "../loaders/redirectLogged.js";
+import Login from "./routes/login.jsx";
+import Register from "./routes/register.jsx";
+import redirectLogged from "./loaders/redirectLogged.js";
 
 const router = createBrowserRouter([
   {

@@ -1,4 +1,4 @@
-import blogApi from "../../../blogAPI.js";
+import blogApi from "../../blogAPI.js";
 import PostsList from "../postsList/postsList.jsx";
 import { useEffect, useState } from "react";
 
