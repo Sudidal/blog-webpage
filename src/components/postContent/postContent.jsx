@@ -19,8 +19,8 @@ function PostContent() {
     post && (
       <div>
         <p>{post.content}</p>
+        <h3>Comments</h3>
         <CommentForm postId={post.id} />
-      <h3>Comments</h3>
         <CommentsList comments={post.comments} />
       </div>
     )
