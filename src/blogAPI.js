@@ -116,7 +116,7 @@ class BlogAPI {
   };
 
   likeComment = async (commentId) => {
-    await fetch(this.#API_URL + "/posts/" + commentId + "/like", {
+    await fetch(this.#API_URL + "/posts/comments/" + commentId + "/like", {
       method: "POST",
       headers: {
         authorization: this.#getAuthToken(),
