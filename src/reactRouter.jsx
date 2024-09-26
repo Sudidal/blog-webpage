@@ -6,6 +6,8 @@ import PostContent from "./components/postContent/postContent.jsx";
 import Login from "./routes/login.jsx";
 import Register from "./routes/register.jsx";
 import redirectLogged from "./loaders/redirectLogged.js";
+import NewPost from "./routes/newPost.jsx";
+import EditPost from "./routes/editPost.jsx";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +38,14 @@ const router = createBrowserRouter([
           {
             path: ":postId",
             element: <PostContent />,
+          },
+          {
+            path: "new",
+            element: <NewPost />,
+          },
+          {
+            path: "edit/:postId",
+            element: <EditPost />,
           },
         ],
       },

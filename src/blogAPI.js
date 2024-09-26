@@ -2,6 +2,8 @@ import storageManager from "./storageManager.js";
 
 class BlogAPI {
   #API_URL = "http://localhost:4000";
+  #ADMIN_ROLE_NAME = "ADMIN";
+  #AUTHOR_ROLE_NAME = "AUTHOR";
   constructor() {}
 
   #getAuthToken = () => storageManager.getAuthenticationKey();
@@ -49,6 +51,7 @@ class BlogAPI {
       headers: { authorization: this.#getAuthToken() },
     });
     const postsObj = await res.json();
+    this.addIsPublished(postsObj.posts);
     return postsObj.posts;
   }
 
@@ -58,10 +61,26 @@ class BlogAPI {
       headers: { authorization: this.#getAuthToken() },
     });
     const postsObj = await res.json();
+    this.addIsPublished(postsObj.post);
     return postsObj.post;
   }
 
-  async postComment(content, postId) {
+  postNewPost = async (values) => {
+    await fetch(this.#API_URL + "/posts", {
+      method: "POST",
+      headers: {
+        authorization: this.#getAuthToken(),
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: values.title,
+        content: values.content,
+        publish: values.publish,
+      }),
+    });
+  };
+
+  async postNewComment(content, postId) {
     await fetch(this.#API_URL + "/posts/" + postId + "/comments", {
       method: "POST",
       headers: {
@@ -70,6 +89,47 @@ class BlogAPI {
       },
       body: JSON.stringify({ content }),
     });
+  }
+
+  editPost = async (values, postId) => {
+    await fetch(this.#API_URL + "/posts/" + postId, {
+      method: "PUT",
+      headers: {
+        authorization: this.#getAuthToken(),
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: values.title,
+        content: values.content,
+        publish: values.publish,
+      }),
+    });
+  };
+
+  deletePost = async (postId) => {
+    await fetch(this.#API_URL + "/posts/" + postId, {
+      method: "DELETE",
+      headers: {
+        authorization: this.#getAuthToken(),
+      },
+    });
+  };
+
+  addIsPublished(input) {
+    if (Array.isArray(input)) {
+      input.forEach((item) => {
+        item.isPublished = item.postStatus === "PUBLISHED";
+      });
+    } else {
+      input.isPublished = input.postStatus === "PUBLISHED";
+    }
+  }
+
+  isAdmin(user) {
+    return user?.role === this.#ADMIN_ROLE_NAME;
+  }
+  isAuthor(user) {
+    return user?.role === this.#AUTHOR_ROLE_NAME;
   }
 }
 

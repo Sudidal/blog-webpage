@@ -5,7 +5,7 @@ function CommentForm({postId}) {
   return (
     <form onSubmit={(ev) => {
       ev.preventDefault();
-      blogApi.postComment(ev.target["0"].value, postId)
+      blogApi.postNewComment(ev.target["0"].value, postId)
     }}>
       <input type="text" name="content" />
       <button type="submit">Post</button>
