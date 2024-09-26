@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 function CommentCard({ comment }) {
   return (
     <div className={classes.commentCard}>
-      <p>By: {comment.user.username}</p>
+      <em>By: {comment.user.username}</em>
       <p>{comment.content}</p>
     </div>
   );

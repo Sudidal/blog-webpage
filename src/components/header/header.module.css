@@ -1,0 +1,32 @@
+.header {
+  margin-bottom: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 70px;
+  background-color: rgb(61, 61, 61);
+  color: white;
+}
+
+.header *{
+  color: white;
+  border-color: white;
+}
+
+.header nav,
+.right,
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.header nav {
+  justify-content: space-between;
+}
+
+.left {
+  gap: 10px;
+}
+.left em {
+  font-size: 12px;
+  transform: translateY(10px);
+}

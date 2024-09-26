@@ -9,24 +9,32 @@ function PostCard({ post }) {
   const user = useContext(userContext);
 
   return (
-    <Link to={"/posts/" + post.id} className={classes.postCard}>
-      <p>{post.title}</p>
-      <p>{post.author.username}</p>
-      <p>{post.publishDate}</p>
-      <p>{post.comments.length}</p>
-      {blogApi.isAdmin(user) && (
-        <div>
-          <Link to={"/posts/edit/" + post.id}>Edit</Link>
-          <button
-            onClick={() => {
-              blogApi.deletePost(post.id);
-            }}
-          >
-            Delete
-          </button>
+    <div className={classes.postCard}>
+      <Link to={"/posts/" + post.id} className="unstyled-link">
+        <em>By: {post.author.username}</em>
+        <em>{post.publishDate}</em>
+        <p>{post.title}</p>
+      </Link>
+      <div className={classes.bottomSide}>
+        <div className={classes.left}>{post.comments.length}</div>
+        <div className={classes.right}>
+          {blogApi.isAdmin(user) && (
+            <div>
+              <Link to={"/posts/edit/" + post.id} className="button-link">
+                Edit
+              </Link>
+              <button
+                onClick={() => {
+                  blogApi.deletePost(post.id);
+                }}
+              >
+                Delete
+              </button>
+            </div>
+          )}
         </div>
-      )}
-    </Link>
+      </div>
+    </div>
   );
 }
 

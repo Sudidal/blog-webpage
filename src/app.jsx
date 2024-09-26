@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import blogApi from "./blogAPI.js";
 import { Link } from "react-router-dom";
 import { userContext } from "./contexts/userContext.jsx";
+import Header from "./components/header/header.jsx";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -16,12 +17,10 @@ function App() {
   return (
     <userContext.Provider value={user}>
       <div>
-        <h1>Oxide Blog</h1>
-        {user && <h5>Welcome, {user.username}</h5>}
-        {(blogApi.isAdmin(user) || blogApi.isAuthor(user)) && (
-          <Link to="posts/new">New Post</Link>
-        )}
-        <Outlet />
+        <Header />
+        <main className="content">
+          <Outlet />
+        </main>
       </div>
     </userContext.Provider>
   );

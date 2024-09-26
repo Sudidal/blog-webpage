@@ -1,0 +1,28 @@
+import { useContext } from "react";
+import { userContext } from "../../contexts/userContext.jsx";
+import { Link } from "react-router-dom";
+import classes from "./header.module.css";
+
+function Header() {
+  const user = useContext(userContext);
+
+  return (
+    <header className={classes.header}>
+      <nav>
+        <div className={classes.left}>
+          <h1>
+            <Link to="/" className="unstyled-link">Oxide Blog</Link>
+          </h1>
+          {user && <em>Welcome, {user.username}</em>}
+        </div>
+        <div className={classes.right}>
+          <Link to={"/posts/new"} className="button-link">
+            +
+          </Link>
+        </div>
+      </nav>
+    </header>
+  );
+}
+
+export default Header;

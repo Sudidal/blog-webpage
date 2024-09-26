@@ -1,3 +1,5 @@
 .commentCard {
+  padding: 10px;
+  width: 60vw;
   border: 1px solid black
 }

@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import classes from "./postEditor.module.css";
 
 function PostEditor({
   values = { title: "", content: "", isPublished: "" },
@@ -8,6 +9,7 @@ function PostEditor({
   return (
     <div>
       <form
+        className={classes.form}
         onSubmit={(ev) => {
           ev.preventDefault();
           onSubmit(
@@ -20,22 +22,28 @@ function PostEditor({
           );
         }}
       >
-        <input
-          type="checkbox"
-          name="publish"
-          defaultChecked={values.isPublished}
-        />
-        <input
-          type="text"
-          name="title"
-          placeholder="Title"
-          defaultValue={values.title}
-        />
-        <textarea
-          name="content"
-          placeholder="content"
-          defaultValue={values.content}
-        ></textarea>
+        <div className={classes.field}>
+          <input
+            type="checkbox"
+            name="publish"
+            defaultChecked={values.isPublished}
+          />
+        </div>
+        <div className={classes.field}>
+          <input
+            type="text"
+            name="title"
+            placeholder="Title"
+            defaultValue={values.title}
+          />
+        </div>
+        <div className={classes.field}>
+          <textarea
+            name="content"
+            placeholder="content"
+            defaultValue={values.content}
+          ></textarea>
+        </div>
         <button type="submit">Post</button>
       </form>
     </div>
