@@ -106,6 +106,24 @@ class BlogAPI {
     });
   };
 
+  likePost = async (postId) => {
+    await fetch(this.#API_URL + "/posts/" + postId + "/like", {
+      method: "POST",
+      headers: {
+        authorization: this.#getAuthToken(),
+      },
+    });
+  };
+
+  likeComment = async (commentId) => {
+    await fetch(this.#API_URL + "/posts/" + commentId + "/like", {
+      method: "POST",
+      headers: {
+        authorization: this.#getAuthToken(),
+      },
+    });
+  };
+
   deletePost = async (postId) => {
     await fetch(this.#API_URL + "/posts/" + postId, {
       method: "DELETE",

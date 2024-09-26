@@ -16,7 +16,10 @@ function PostCard({ post }) {
         <p>{post.title}</p>
       </Link>
       <div className={classes.bottomSide}>
-        <div className={classes.left}>{post.comments.length}</div>
+        <div className={classes.left}>
+          <p>Comments: {post.comments.length}</p>
+          <p>Likes: {post.likes}</p>
+        </div>
         <div className={classes.right}>
           {blogApi.isAdmin(user) && (
             <div>

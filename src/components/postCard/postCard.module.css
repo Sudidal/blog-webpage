@@ -3,8 +3,15 @@
   width: 60vw;
   border: 1px solid black;
 }
-.bottomSide {
+
+.bottomSide,
+.bottomSide .left,
+.bottomSide .right {
   display: flex;
+  gap: 10px;
+}
+
+.bottomSide {
   justify-content: space-between;
   align-items: center;
 }
