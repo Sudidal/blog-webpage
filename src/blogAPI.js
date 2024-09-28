@@ -14,8 +14,12 @@ class BlogAPI {
       headers: { "Content-Type": "application/json; charset=UTF-8" },
       body: JSON.stringify({ username, email, password, confirm_password }),
     });
-    const data = await res.json();
-    console.log(data);
+    if (res.ok) {
+      return true;
+    } else {
+      const data = await res.json();
+      return data;
+    }
   }
 
   async login(username, password) {
@@ -24,8 +28,14 @@ class BlogAPI {
       headers: { "Content-Type": "application/json; charset=UTF-8" },
       body: JSON.stringify({ username, password }),
     });
-    const data = await res.json();
-    storageManager.setAuthToken(data.jwtToken);
+    if (res.ok) {
+      const data = await res.json();
+      storageManager.setAuthToken(data.jwtToken);
+      return true;
+    } else {
+      const data = await res.json();
+      return data;
+    }
   }
 
   async getUserInfo() {
@@ -33,8 +43,12 @@ class BlogAPI {
       method: "GET",
       headers: { authorization: this.#getAuthToken() },
     });
-    const userObj = await res.json();
-    return userObj.user;
+    if (res.ok) {
+      const userObj = await res.json();
+      return userObj.user;
+    } else {
+      return null;
+    }
   }
 
   async isLoggedIn() {
@@ -42,17 +56,21 @@ class BlogAPI {
       method: "GET",
       headers: { authorization: this.#getAuthToken() },
     });
-    if (res.status === 401) return false;
-    else return true;
+    return res.ok;
   }
 
   async getAllPosts() {
     const res = await fetch(this.#API_URL + "/posts", {
       headers: { authorization: this.#getAuthToken() },
     });
-    const postsObj = await res.json();
-    this.addIsPublished(postsObj.posts);
-    return postsObj.posts;
+    if (res.ok) {
+      const postsObj = await res.json();
+      this.addIsPublished(postsObj.posts);
+      return postsObj.posts;
+    } else {
+      const data = await res.json();
+      return data;
+    }
   }
 
   async getPost(postId) {
@@ -60,13 +78,18 @@ class BlogAPI {
     const res = await fetch(url, {
       headers: { authorization: this.#getAuthToken() },
     });
-    const postsObj = await res.json();
-    this.addIsPublished(postsObj.post);
-    return postsObj.post;
+    if (res.ok) {
+      const postsObj = await res.json();
+      this.addIsPublished(postsObj.post);
+      return postsObj.post;
+    } else {
+      const data = await res.json();
+      return data;
+    }
   }
 
   postNewPost = async (values) => {
-    await fetch(this.#API_URL + "/posts", {
+    const res = await fetch(this.#API_URL + "/posts", {
       method: "POST",
       headers: {
         authorization: this.#getAuthToken(),
@@ -78,10 +101,16 @@ class BlogAPI {
         publish: values.publish,
       }),
     });
+    if (res.ok) {
+      return true;
+    } else {
+      const data = await res.json();
+      return data;
+    }
   };
 
   async postNewComment(content, postId) {
-    await fetch(this.#API_URL + "/posts/" + postId + "/comments", {
+    const res = await fetch(this.#API_URL + "/posts/" + postId + "/comments", {
       method: "POST",
       headers: {
         authorization: this.#getAuthToken(),
@@ -89,10 +118,16 @@ class BlogAPI {
       },
       body: JSON.stringify({ content }),
     });
+    if (res.ok) {
+      return true;
+    } else {
+      const data = await res.json();
+      return data;
+    }
   }
 
   editPost = async (values, postId) => {
-    await fetch(this.#API_URL + "/posts/" + postId, {
+    const res = await fetch(this.#API_URL + "/posts/" + postId, {
       method: "PUT",
       headers: {
         authorization: this.#getAuthToken(),
@@ -104,33 +139,60 @@ class BlogAPI {
         publish: values.publish,
       }),
     });
+    if (res.ok) {
+      return true;
+    } else {
+      const data = await res.json();
+      return data;
+    }
   };
 
   likePost = async (postId) => {
-    await fetch(this.#API_URL + "/posts/" + postId + "/like", {
+    const res = await fetch(this.#API_URL + "/posts/" + postId + "/like", {
       method: "POST",
       headers: {
         authorization: this.#getAuthToken(),
       },
     });
+    if (res.ok) {
+      return true;
+    } else {
+      const data = await res.json();
+      return data;
+    }
   };
 
   likeComment = async (commentId) => {
-    await fetch(this.#API_URL + "/posts/comments/" + commentId + "/like", {
-      method: "POST",
-      headers: {
-        authorization: this.#getAuthToken(),
-      },
-    });
+    const res = await fetch(
+      this.#API_URL + "/posts/comments/" + commentId + "/like",
+      {
+        method: "POST",
+        headers: {
+          authorization: this.#getAuthToken(),
+        },
+      }
+    );
+    if (res.ok) {
+      return true;
+    } else {
+      const data = await res.json();
+      return data;
+    }
   };
 
   deletePost = async (postId) => {
-    await fetch(this.#API_URL + "/posts/" + postId, {
+    const res = await fetch(this.#API_URL + "/posts/" + postId, {
       method: "DELETE",
       headers: {
         authorization: this.#getAuthToken(),
       },
     });
+    if (res.ok) {
+      return true;
+    } else {
+      const data = await res.json();
+      return data;
+    }
   };
 
   addIsPublished(input) {
