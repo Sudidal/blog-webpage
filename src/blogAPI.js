@@ -1,3 +1,4 @@
+import fetchManager from "./fetchManager.js";
 import storageManager from "./storageManager.js";
 
 class BlogAPI {
@@ -6,19 +7,17 @@ class BlogAPI {
   #AUTHOR_ROLE_NAME = "AUTHOR";
   constructor() {}
 
-  #getAuthToken = () => storageManager.getAuthenticationKey();
-
   async register(values) {
-    const res = await fetch(this.#API_URL + "/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json; charset=UTF-8" },
-      body: JSON.stringify({
+    const res = await fetchManager.authPostFetchReq(
+      this.#API_URL + "/register",
+      {
         username: values.username,
         email: values.email,
         password: values.password,
         confirm_password: values.confirm_password,
-      }),
-    });
+      }
+    );
+
     if (res.ok) {
       return true;
     } else {
@@ -28,11 +27,11 @@ class BlogAPI {
   }
 
   async login(username, password) {
-    const res = await fetch(this.#API_URL + "/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json; charset=UTF-8" },
-      body: JSON.stringify({ username, password }),
+    const res = await fetchManager.authPostFetchReq(this.#API_URL + "/login", {
+      username,
+      password,
     });
+
     if (res.ok) {
       const data = await res.json();
       storageManager.setAuthToken(data.jwtToken);
@@ -44,10 +43,8 @@ class BlogAPI {
   }
 
   async getUserInfo() {
-    const res = await fetch(this.#API_URL + "/users/me", {
-      method: "GET",
-      headers: { authorization: this.#getAuthToken() },
-    });
+    const res = await fetchManager.authGetFetchReq(this.#API_URL + "/users/me");
+
     if (res.ok) {
       const userObj = await res.json();
       return userObj.user;
@@ -57,20 +54,17 @@ class BlogAPI {
   }
 
   async isLoggedIn() {
-    const res = await fetch(this.#API_URL + "/users/me", {
-      method: "GET",
-      headers: { authorization: this.#getAuthToken() },
-    });
+    const res = await fetchManager.authGetFetchReq(this.#API_URL + "/users/me");
+
     return res.ok;
   }
 
   async getAllPosts() {
-    const res = await fetch(this.#API_URL + "/posts", {
-      headers: { authorization: this.#getAuthToken() },
-    });
+    const res = await fetchManager.authGetFetchReq(this.#API_URL + "/posts");
+
     if (res.ok) {
       const postsObj = await res.json();
-      this.addIsPublished(postsObj.posts);
+      this.#addIsPublished(postsObj.posts);
       return postsObj.posts;
     } else {
       const data = await res.json();
@@ -79,13 +73,13 @@ class BlogAPI {
   }
 
   async getPost(postId) {
-    const url = this.#API_URL + "/posts/" + postId;
-    const res = await fetch(url, {
-      headers: { authorization: this.#getAuthToken() },
-    });
+    const res = await fetchManager.authGetFetchReq(
+      this.#API_URL + "/posts/" + postId
+    );
+
     if (res.ok) {
       const postsObj = await res.json();
-      this.addIsPublished(postsObj.post);
+      this.#addIsPublished(postsObj.post);
       return postsObj.post;
     } else {
       const data = await res.json();
@@ -94,18 +88,12 @@ class BlogAPI {
   }
 
   postNewPost = async (values) => {
-    const res = await fetch(this.#API_URL + "/posts", {
-      method: "POST",
-      headers: {
-        authorization: this.#getAuthToken(),
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: values.title,
-        content: values.content,
-        publish: values.publish,
-      }),
+    const res = await fetchManager.authPostFetchReq(this.#API_URL + "/posts", {
+      title: values.title,
+      content: values.content,
+      publish: values.publish,
     });
+
     if (res.ok) {
       return true;
     } else {
@@ -115,14 +103,11 @@ class BlogAPI {
   };
 
   async postNewComment(content, postId) {
-    const res = await fetch(this.#API_URL + "/posts/" + postId + "/comments", {
-      method: "POST",
-      headers: {
-        authorization: this.#getAuthToken(),
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ content }),
-    });
+    const res = await fetchManager.authPostFetchReq(
+      this.#API_URL + "/posts/" + postId + "/comments",
+      { content }
+    );
+
     if (res.ok) {
       return true;
     } else {
@@ -132,18 +117,15 @@ class BlogAPI {
   }
 
   editPost = async (values, postId) => {
-    const res = await fetch(this.#API_URL + "/posts/" + postId, {
-      method: "PUT",
-      headers: {
-        authorization: this.#getAuthToken(),
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    const res = await fetchManager.authPutFetchReq(
+      this.#API_URL + "/posts/" + postId,
+      {
         title: values.title,
         content: values.content,
         publish: values.publish,
-      }),
-    });
+      }
+    );
+
     if (res.ok) {
       return true;
     } else {
@@ -153,12 +135,10 @@ class BlogAPI {
   };
 
   likePost = async (postId) => {
-    const res = await fetch(this.#API_URL + "/posts/" + postId + "/like", {
-      method: "POST",
-      headers: {
-        authorization: this.#getAuthToken(),
-      },
-    });
+    const res = await fetchManager.authPostFetchReq(
+      this.#API_URL + "/posts/" + postId + "/like"
+    );
+
     if (res.ok) {
       return true;
     } else {
@@ -168,15 +148,10 @@ class BlogAPI {
   };
 
   likeComment = async (commentId) => {
-    const res = await fetch(
-      this.#API_URL + "/posts/comments/" + commentId + "/like",
-      {
-        method: "POST",
-        headers: {
-          authorization: this.#getAuthToken(),
-        },
-      }
+    const res = await fetchManager.authPostFetchReq(
+      this.#API_URL + "/posts/comments/" + commentId + "/like"
     );
+
     if (res.ok) {
       return true;
     } else {
@@ -186,12 +161,10 @@ class BlogAPI {
   };
 
   deletePost = async (postId) => {
-    const res = await fetch(this.#API_URL + "/posts/" + postId, {
-      method: "DELETE",
-      headers: {
-        authorization: this.#getAuthToken(),
-      },
-    });
+    const res = await fetchManager.authDeleteFetchReq(
+      this.#API_URL + "/posts/" + postId
+    );
+
     if (res.ok) {
       return true;
     } else {
@@ -200,7 +173,7 @@ class BlogAPI {
     }
   };
 
-  addIsPublished(input) {
+  #addIsPublished(input) {
     if (Array.isArray(input)) {
       input.forEach((item) => {
         item.isPublished = item.postStatus === "PUBLISHED";
