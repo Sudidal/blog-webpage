@@ -3,16 +3,21 @@ import PostsList from "../postsList/postsList.jsx";
 import { useEffect, useState } from "react";
 
 function AllPosts() {
+  const [update, setUpdate] = useState(false)
   const [posts, setPosts] = useState(null)
   useEffect(() => {
       blogApi.getAllPosts().then(res => {
         setPosts(res)
       });
-  }, [setPosts])
+  }, [setPosts, update])
+
+  function updateComponent() {
+    setUpdate(!update)
+  }
 
   return (
     posts &&
-    <PostsList posts={posts} />
+    <PostsList posts={posts} onPostDelete={updateComponent} />
   )
 }
 

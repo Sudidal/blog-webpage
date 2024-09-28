@@ -1,29 +1,46 @@
 import blogApi from "../../blogAPI.js";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import CommentsList from "../commentsList/commentsList.jsx";
-import CommentForm from "../commentForm/commentForm.jsx";
+import CommentSection from "../commentSection/commentSection.jsx";
 import IconButtonWithCount from "../iconButtonWithCount/iconButtonWithCount.jsx";
 
 function PostContent() {
+  const [update, setUpdate] = useState(false);
   const [post, setPost] = useState(null);
-
   const params = useParams();
 
   useEffect(() => {
     blogApi.getPost(params.postId).then((res) => {
       setPost(res);
     });
-  }, [params.postId]);
+  }, [params.postId, update]);
+
+  function likeThePost() {
+    blogApi.likePost(post.id).then((res) => {
+      if (res === true) {
+        updateComponent();
+      }
+    });
+  }
+
+  function updateComponent() {
+    setUpdate(!update);
+  }
 
   return (
     post && (
       <div>
         <p>{post.content}</p>
-        <IconButtonWithCount iconSrc="/heart.svg" count={post.likes} onClick={() => {blogApi.likePost(post.id)}} />
-        <h3>Comments</h3>
-        <CommentForm postId={post.id} />
-        <CommentsList comments={post.comments} />
+        <IconButtonWithCount
+          iconSrc="/heart.svg"
+          count={post.likes}
+          onClick={likeThePost}
+        />
+        <CommentSection
+          post={post}
+          onCommentPost={updateComponent}
+          onCommentLike={updateComponent}
+        />
       </div>
     )
   );

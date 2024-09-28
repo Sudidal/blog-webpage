@@ -1,11 +1,10 @@
-import blogApi from "../../blogAPI.js"
 import PropTypes from "prop-types";
 
-function CommentForm({postId}) {
+function CommentForm({postId, onSubmit}) {
   return (
     <form onSubmit={(ev) => {
       ev.preventDefault();
-      blogApi.postNewComment(ev.target["0"].value, postId)
+      onSubmit(ev.target["0"].value)
     }}>
       <input type="text" name="content" />
       <button type="submit">Post</button>
@@ -14,7 +13,8 @@ function CommentForm({postId}) {
 }
 
 CommentForm.propTypes = {
-  postId: PropTypes.number
+  postId: PropTypes.number,
+  onSubmit: PropTypes.func
 }
 
 export default CommentForm
