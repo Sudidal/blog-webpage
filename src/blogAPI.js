@@ -8,11 +8,16 @@ class BlogAPI {
 
   #getAuthToken = () => storageManager.getAuthenticationKey();
 
-  async register(username, email, password, confirm_password) {
+  async register(values) {
     const res = await fetch(this.#API_URL + "/register", {
       method: "POST",
       headers: { "Content-Type": "application/json; charset=UTF-8" },
-      body: JSON.stringify({ username, email, password, confirm_password }),
+      body: JSON.stringify({
+        username: values.username,
+        email: values.email,
+        password: values.password,
+        confirm_password: values.confirm_password,
+      }),
     });
     if (res.ok) {
       return true;

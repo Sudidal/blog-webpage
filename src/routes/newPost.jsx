@@ -1,11 +1,22 @@
 import blogApi from "../blogAPI.js";
+import { useNavigate } from "react-router-dom";
 import PostEditor from "../components/postEditor/postEditor.jsx";
 
 function NewPost() {
+  const navigate = useNavigate()
+
+  function onSubmit(values) {
+    blogApi.postNewPost(values).then(res => {
+      if(res === true) {
+        navigate("/posts")
+      }
+    })
+  }
+  
   return (
     <div>
       <h3>Making a new post</h3>
-      <PostEditor onSubmit={blogApi.postNewPost} />
+      <PostEditor onSubmit={onSubmit} />
     </div>
   )
 }

@@ -1,11 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
+import redirectLogged from "./loaders/redirectLogged.js";
+import redirectNotLogged from "./loaders/redirectNotLogged.js";
 import App from "./app.jsx";
 import Posts from "./routes/posts.jsx";
 import AllPosts from "./components/allPosts/allPosts.jsx";
 import PostContent from "./components/postContent/postContent.jsx";
 import Login from "./routes/login.jsx";
 import Register from "./routes/register.jsx";
-import redirectLogged from "./loaders/redirectLogged.js";
 import NewPost from "./routes/newPost.jsx";
 import EditPost from "./routes/editPost.jsx";
 
@@ -28,8 +29,20 @@ const router = createBrowserRouter([
         loader: redirectLogged,
       },
       {
+        path: "/",
+        element: <Posts />,
+        loader: redirectNotLogged,
+        children: [
+          {
+            path: "",
+            element: <AllPosts />
+          }
+        ]
+      },
+      {
         path: "posts",
         element: <Posts />,
+        loader: redirectNotLogged,
         children: [
           {
             path: "",

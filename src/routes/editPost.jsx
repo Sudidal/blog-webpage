@@ -1,9 +1,10 @@
 import blogApi from "../blogAPI.js";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import PostEditor from "../components/postEditor/postEditor.jsx";
 
 function EditPost() {
+  const navigate = useNavigate()
   const [post, setPost] = useState(null)
   const [values, setValues] = useState(null)
   const postId = useParams().postId
@@ -19,11 +20,19 @@ function EditPost() {
     })
   }, [postId])
 
+  function onSubmit(values) {
+    blogApi.editPost(values, post.id).then(res => {
+      if(res === true) {
+        navigate("/posts")
+      }
+    })
+  }
+
   return (
     post &&
     <div>
       <h3>Editing an existing post</h3>
-      <PostEditor values={values} onSubmit={blogApi.editPost} postId={post.id} />
+      <PostEditor values={values} onSubmit={onSubmit} postId={post.id} />
     </div>
   )
 }

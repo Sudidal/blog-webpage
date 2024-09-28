@@ -1,11 +1,27 @@
 import blogApi from "../blogAPI.js";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
+  const navigate = useNavigate();
+
+  function onSubmit(values) {
+    blogApi.register(values).then((res) => {
+      if (res === true) {
+        navigate("/login");
+      }
+    });
+  }
+
   return (
     <form
       onSubmit={(ev) => {
-        ev.preventDefault()
-        blogApi.register(ev.target["0"].value, ev.target["1"].value, ev.target["2"].value, ev.target["3"].value);
+        ev.preventDefault();
+        onSubmit({
+          username: ev.target["0"].value,
+          email: ev.target["1"].value,
+          password: ev.target["2"].value,
+          confirm_password: ev.target["3"].value,
+        });
       }}
     >
       <input type="text" name="username" placeholder="username" />

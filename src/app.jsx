@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
 import blogApi from "./blogAPI.js";
-import { Link } from "react-router-dom";
 import { userContext } from "./contexts/userContext.jsx";
 import Header from "./components/header/header.jsx";
 
@@ -10,7 +9,9 @@ function App() {
 
   useEffect(() => {
     blogApi.getUserInfo().then((res) => {
-      setUser(res);
+      if (res === true) {
+        setUser(res);
+      }
     });
   }, [setUser]);
 
