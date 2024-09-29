@@ -7,6 +7,9 @@ class StorageManager {
   setAuthToken(token) {
     localStorage.setItem(this.#AUTH_TOKEN_KEY, this.#STUPID_WORD + token);
   }
+  removeAuthToken() {
+    localStorage.removeItem(this.#AUTH_TOKEN_KEY);
+  }
   getAuthenticationKey() {
     return localStorage.getItem(this.#AUTH_TOKEN_KEY);
   }

@@ -1,10 +1,12 @@
-import { Outlet } from "react-router-dom";
-import { useState, useEffect } from "react";
 import blogApi from "./blogAPI.js";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { userContext } from "./contexts/userContext.jsx";
 import Header from "./components/header/header.jsx";
 
 function App() {
+  const navigate = useNavigate()
+  const [update, setUpdate] = useState(false)
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -13,12 +15,25 @@ function App() {
         setUser(res);
       }
     });
-  }, [setUser]);
+  }, [setUser, update]);
+
+  function logout() {
+    blogApi.logout().then(res => {
+      if(res === true) {
+        navigate("/")
+      }
+    })
+  }
+
+  function updateComponent() {
+    setUpdate(!update)
+  }
+
 
   return (
     <userContext.Provider value={user}>
       <div>
-        <Header />
+        <Header logout={logout} />
         <main className="content">
           <Outlet />
         </main>

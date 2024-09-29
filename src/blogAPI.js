@@ -42,6 +42,11 @@ class BlogAPI {
     }
   }
 
+  async logout() {
+    storageManager.removeAuthToken();
+    return true;
+  }
+
   async getUserInfo() {
     const res = await fetchManager.authGetFetchReq(this.#API_URL + "/users/me");
 

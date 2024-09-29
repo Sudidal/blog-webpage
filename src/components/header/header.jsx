@@ -1,9 +1,10 @@
+import PropTypes from "prop-types";
 import { useContext } from "react";
 import { userContext } from "../../contexts/userContext.jsx";
 import { Link } from "react-router-dom";
 import classes from "./header.module.css";
 
-function Header() {
+function Header({logout}) {
   const user = useContext(userContext);
 
   return (
@@ -16,6 +17,7 @@ function Header() {
           {user && <em>Welcome, {user.username}</em>}
         </div>
         <div className={classes.right}>
+          <button onClick={logout}>Log Out</button>
           <Link to={"/posts/new"} className="button-link">
             +
           </Link>
@@ -23,6 +25,10 @@ function Header() {
       </nav>
     </header>
   );
+}
+
+Header.propTypes ={
+  logout: PropTypes.func
 }
 
 export default Header;
