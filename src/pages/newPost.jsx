@@ -1,6 +1,6 @@
 import blogApi from "../blogAPI.js";
 import { useNavigate } from "react-router-dom";
-import PostEditor from "../components/postEditor/postEditor.jsx";
+import PostEditor from "../components/posts/postEditor/postEditor.jsx";
 
 function NewPost() {
   const navigate = useNavigate()

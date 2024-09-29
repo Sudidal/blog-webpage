@@ -1,4 +1,4 @@
-import blogApi from "../../blogAPI.js";
+import blogApi from "../../../blogAPI.js";
 import PropTypes from "prop-types";
 import CommentsList from "../commentsList/commentsList.jsx";
 import CommentForm from "../commentForm/commentForm.jsx";

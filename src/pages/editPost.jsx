@@ -1,7 +1,7 @@
 import blogApi from "../blogAPI.js";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import PostEditor from "../components/postEditor/postEditor.jsx";
+import PostEditor from "../components/posts/postEditor/postEditor.jsx";
 
 function EditPost() {
   const navigate = useNavigate()

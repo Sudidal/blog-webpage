@@ -1,12 +1,12 @@
 import classes from "./postCard.module.css";
 import PropTypes from "prop-types";
-import blogApi from "../../blogAPI.js";
+import blogApi from "../../../blogAPI.js";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { userContext } from "../../contexts/userContext.jsx";
-import IconWithCount from "../iconWithCount/iconWithCount.jsx";
-import IconButton from "../iconButton/iconButton.jsx";
-import ClickableArea from "../clickableArea/clickableArea.jsx";
+import { userContext } from "../../../contexts/userContext.jsx";
+import IconWithCount from "../../iconWithCount/iconWithCount.jsx";
+import IconButton from "../../iconButton/iconButton.jsx";
+import ClickableArea from "../../clickableArea/clickableArea.jsx";
 
 function PostCard({ post, onDelete }) {
   const user = useContext(userContext);

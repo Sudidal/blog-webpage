@@ -3,12 +3,12 @@ import redirectLogged from "./loaders/redirectLogged.js";
 import redirectNotLogged from "./loaders/redirectNotLogged.js";
 import App from "./app.jsx";
 import Posts from "./routes/posts.jsx";
-import AllPosts from "./components/allPosts/allPosts.jsx";
-import PostContent from "./components/postContent/postContent.jsx";
+import AllPosts from "./pages/allPosts.jsx";
+import PostContent from "./pages/postContent.jsx";
 import Login from "./routes/login.jsx";
 import Register from "./routes/register.jsx";
-import NewPost from "./routes/newPost.jsx";
-import EditPost from "./routes/editPost.jsx";
+import NewPost from "./pages/newPost.jsx";
+import EditPost from "./pages/editPost.jsx";
 
 const router = createBrowserRouter([
   {

@@ -1,8 +1,8 @@
-import blogApi from "../../blogAPI.js";
+import blogApi from "../blogAPI.js";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import CommentSection from "../commentSection/commentSection.jsx";
-import IconButtonWithCount from "../iconButtonWithCount/iconButtonWithCount.jsx";
+import CommentSection from "../components/comments/commentSection/commentSection.jsx";
+import IconButtonWithCount from "../components/iconButtonWithCount/iconButtonWithCount.jsx";
 
 function PostContent() {
   const [update, setUpdate] = useState(false);

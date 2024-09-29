@@ -1,7 +1,6 @@
-import blogApi from "../../blogAPI.js";
 import classes from "./commentCard.module.css";
 import PropTypes from "prop-types";
-import IconButtonWithCount from "../iconButtonWithCount/iconButtonWithCount.jsx";
+import IconButtonWithCount from "../../iconButtonWithCount/iconButtonWithCount.jsx";
 
 function CommentCard({ comment, onLike }) {
   return (

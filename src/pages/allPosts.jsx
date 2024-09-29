@@ -1,5 +1,5 @@
-import blogApi from "../../blogAPI.js";
-import PostsList from "../postsList/postsList.jsx";
+import blogApi from "../blogAPI.js";
+import PostsList from "../components/posts/postsList/postsList.jsx";
 import { useEffect, useState } from "react";
 
 function AllPosts() {

@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useContext } from "react";
-import { userContext } from "../../contexts/userContext.jsx";
+import { userContext } from "../../../contexts/userContext.jsx";
 import { Link } from "react-router-dom";
 import classes from "./header.module.css";
 
