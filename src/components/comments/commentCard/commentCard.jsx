@@ -1,19 +1,62 @@
 import classes from "./commentCard.module.css";
 import PropTypes from "prop-types";
+import { useState } from "react";
+import CommentForm from "../commentForm/commentForm.jsx";
 import IconButtonWithCount from "../../iconButtonWithCount/iconButtonWithCount.jsx";
+import IconButton from "../../iconButton/iconButton.jsx";
 
-function CommentCard({ comment, onLike }) {
+function CommentCard({ comment, onLike, onEdit, onDelete }) {
+  const [edit, setEdit] = useState(false);
+
+  function startEdit() {
+    setEdit(true);
+  }
+  function stopEdit() {
+    setEdit(false);
+  }
+
   return (
     <div className={classes.commentCard}>
-      <em>By: {comment.user.username}</em>
-      <p>{comment.content}</p>
-      <IconButtonWithCount
-        iconSrc={"/heart.svg"}
-        count={comment.likes}
-        onClick={() => {
-          onLike(comment.id);
-        }}
-      />
+      {edit ? (
+        <>
+          <CommentForm
+            onSubmit={(content) => {
+              stopEdit()
+              onEdit(content, comment.id);
+            }}
+            values={{ content: comment.content }}
+          />{" "}
+          <button onClick={stopEdit}>X</button>
+        </>
+      ) : (
+        <>
+          <em>By: {comment.user.username}</em>
+          <p>{comment.content}</p>
+          <IconButtonWithCount
+            iconSrc={"/heart.svg"}
+            count={comment.likes}
+            onClick={() => {
+              onLike(comment.id);
+            }}
+          />
+          {comment.deletableByUser && (
+            <IconButton
+              iconSrc={"/delete.svg"}
+              onClick={() => {
+                onDelete(comment.id);
+              }}
+            />
+          )}
+          {comment.editableByUser && (
+            <IconButton
+              iconSrc={"/edit.svg"}
+              onClick={() => {
+                startEdit();
+              }}
+            />
+          )}
+        </>
+      )}
     </div>
   );
 }
@@ -21,6 +64,8 @@ function CommentCard({ comment, onLike }) {
 CommentCard.propTypes = {
   comment: PropTypes.object,
   onLike: PropTypes.func,
+  onEdit: PropTypes.func,
+  onDelete: PropTypes.func,
 };
 
 export default CommentCard;

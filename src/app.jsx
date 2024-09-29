@@ -6,7 +6,6 @@ import Header from "./components/layout/header/header.jsx";
 
 function App() {
   const navigate = useNavigate()
-  const [update, setUpdate] = useState(false)
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -15,7 +14,7 @@ function App() {
         setUser(res);
       }
     });
-  }, [setUser, update]);
+  }, [setUser]);
 
   function logout() {
     blogApi.logout().then(res => {

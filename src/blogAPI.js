@@ -92,6 +92,20 @@ class BlogAPI {
     }
   }
 
+  async getComment(commentId) {
+    const res = await fetchManager.authGetFetchReq(
+      this.#API_URL + "/posts/comments/" + commentId
+    );
+
+    if (res.ok) {
+      const commentObj = await res.json();
+      return commentObj.comment;
+    } else {
+      const data = await res.json();
+      return data;
+    }
+  }
+
   postNewPost = async (values) => {
     const res = await fetchManager.authPostFetchReq(this.#API_URL + "/posts", {
       title: values.title,
@@ -139,6 +153,22 @@ class BlogAPI {
     }
   };
 
+  editComment = async (content, commentId) => {
+    const res = await fetchManager.authPutFetchReq(
+      this.#API_URL + "/posts/comments/" + commentId,
+      {
+        content,
+      }
+    );
+
+    if (res.ok) {
+      return true;
+    } else {
+      const data = await res.json();
+      return data;
+    }
+  };
+
   likePost = async (postId) => {
     const res = await fetchManager.authPostFetchReq(
       this.#API_URL + "/posts/" + postId + "/like"
@@ -168,6 +198,19 @@ class BlogAPI {
   deletePost = async (postId) => {
     const res = await fetchManager.authDeleteFetchReq(
       this.#API_URL + "/posts/" + postId
+    );
+
+    if (res.ok) {
+      return true;
+    } else {
+      const data = await res.json();
+      return data;
+    }
+  };
+
+  deleteComment = async (commentId) => {
+    const res = await fetchManager.authDeleteFetchReq(
+      this.#API_URL + "/posts/comments/" + commentId
     );
 
     if (res.ok) {

@@ -40,6 +40,8 @@ function PostContent() {
           post={post}
           onCommentPost={updateComponent}
           onCommentLike={updateComponent}
+          onCommentEdit={updateComponent}
+          onCommentDelete={updateComponent}
         />
       </div>
     )
