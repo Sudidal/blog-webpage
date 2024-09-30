@@ -1,10 +1,13 @@
 import blogApi from "../blogAPI.js";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { setMsgsContext } from "../contexts/mgsContext.jsx";
 import CommentSection from "../components/comments/commentSection/commentSection.jsx";
 import IconButtonWithCount from "../components/iconButtonWithCount/iconButtonWithCount.jsx";
 
 function PostContent() {
+  const setErrMsgs = useContext(setMsgsContext)
+
   const [update, setUpdate] = useState(false);
   const [post, setPost] = useState(null);
   const params = useParams();
@@ -19,6 +22,9 @@ function PostContent() {
     blogApi.likePost(post.id).then((res) => {
       if (res === true) {
         updateComponent();
+      }
+      else {
+        setErrMsgs(res.errors)
       }
     });
   }

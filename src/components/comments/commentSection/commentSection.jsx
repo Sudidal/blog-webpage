@@ -1,13 +1,20 @@
 import blogApi from "../../../blogAPI.js";
 import PropTypes from "prop-types";
+import { useContext } from "react";
+import { setMsgsContext } from "../../../contexts/mgsContext.jsx";
 import CommentsList from "../commentsList/commentsList.jsx";
 import CommentForm from "../commentForm/commentForm.jsx";
 
 function CommentSection({ post, onCommentPost, onCommentLike, onCommentEdit, onCommentDelete }) {
+  const setErrMsgs = useContext(setMsgsContext)
+  
   function postComment(content) {
     blogApi.postNewComment(content, post.id).then((res) => {
       if (res === true) {
         onCommentPost();
+      }
+      else {
+        setErrMsgs(res.errors)
       }
     });
   }
@@ -16,6 +23,9 @@ function CommentSection({ post, onCommentPost, onCommentLike, onCommentEdit, onC
       if(res === true) {
         onCommentLike()
       }
+      else {
+        setErrMsgs(res.errors)
+      }
     })
   }
   function editComment(content, commentId) {
@@ -23,12 +33,18 @@ function CommentSection({ post, onCommentPost, onCommentLike, onCommentEdit, onC
       if(res === true) {
         onCommentEdit()
       }
+      else {
+        setErrMsgs(res.errors)
+      }
     })
   }
   function deleteComment(commentId) {
     blogApi.deleteComment(commentId).then(res => {
       if(res === true) {
         onCommentDelete()
+      }
+      else {
+        setErrMsgs(res.errors)
       }
     })
   }

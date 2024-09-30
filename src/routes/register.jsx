@@ -1,13 +1,19 @@
 import blogApi from "../blogAPI.js";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { setMsgsContext } from "../contexts/mgsContext.jsx";
 
 function Register() {
+  const setErrMsgs = useContext(setMsgsContext)
   const navigate = useNavigate();
 
   function onSubmit(values) {
     blogApi.register(values).then((res) => {
       if (res === true) {
         navigate("/login");
+      }
+      else {
+        setErrMsgs(res.errors)
       }
     });
   }

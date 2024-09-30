@@ -1,9 +1,11 @@
 import blogApi from "../blogAPI.js";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { setMsgsContext } from "../contexts/mgsContext.jsx";
 import PostEditor from "../components/posts/postEditor/postEditor.jsx";
 
 function EditPost() {
+  const setErrMsgs = useContext(setMsgsContext)
   const navigate = useNavigate()
   const [post, setPost] = useState(null)
   const [values, setValues] = useState(null)
@@ -24,6 +26,9 @@ function EditPost() {
     blogApi.editPost(values, post.id).then(res => {
       if(res === true) {
         navigate("/posts")
+      }
+      else {
+        setErrMsgs(res.errors)
       }
     })
   }

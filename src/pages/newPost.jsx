@@ -1,14 +1,20 @@
 import blogApi from "../blogAPI.js";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { setMsgsContext } from "../contexts/mgsContext.jsx";
 import PostEditor from "../components/posts/postEditor/postEditor.jsx";
 
 function NewPost() {
+  const setErrMsgs = useContext(setMsgsContext)
   const navigate = useNavigate()
 
   function onSubmit(values) {
     blogApi.postNewPost(values).then(res => {
       if(res === true) {
         navigate("/posts")
+      }
+      else {
+        setErrMsgs(res.errors)
       }
     })
   }

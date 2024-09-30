@@ -1,5 +1,6 @@
 import fetchManager from "./fetchManager.js";
 import storageManager from "./storageManager.js";
+import { v4 as uuidv4 } from "uuid";
 
 class BlogAPI {
   #API_URL = "http://localhost:4000";
@@ -22,6 +23,7 @@ class BlogAPI {
       return true;
     } else {
       const data = await res.json();
+      this.#addUUIDToMsgs(data);
       return data;
     }
   }
@@ -229,6 +231,12 @@ class BlogAPI {
     } else {
       input.isPublished = input.postStatus === "PUBLISHED";
     }
+  }
+
+  #addUUIDToMsgs(obj) {
+    obj.errors.forEach((err) => {
+      err.id = uuidv4();
+    });
   }
 
   isAdmin(user) {
