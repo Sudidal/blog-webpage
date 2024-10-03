@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import IconWithCount from "../../iconWithCount/iconWithCount.jsx";
 import IconButton from "../../iconButton/iconButton.jsx";
 import ClickableArea from "../../clickableArea/clickableArea.jsx";
+import PrettyDate from "../../prettyDate/prettyDate.jsx";
 
 function PostCard({ post, onDelete }) {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ function PostCard({ post, onDelete }) {
         }}
       >
         <em>By: {post.author.username}</em>
-        <em>{post.publishDate}</em>
+        <PrettyDate isoString={post.publishDate}></PrettyDate>
         <p>{post.title}</p>
         <div className={classes.bottomSide}>
           <div className={classes.left}>

@@ -234,6 +234,7 @@ class BlogAPI {
 
   async #formatResMsgs(res) {
     const obj = await res.json();
+    console.log(Object.assign(obj));
 
     if (!Array.isArray(obj.errors)) {
       obj.errors = [obj.errors];
