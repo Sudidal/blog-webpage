@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
 import classes from "./clickableIconWithCount.module.css";
+import FileToInlineSvg from "../fileToInlineSvg/fileToInlineSvg.jsx";
 
 function ClickableIconWithCount({ count, iconSrc, onClick }) {
-  const iconStyle = { width: "20px" };
+  const iconStyle = { width: "20px", height: "20px" };
 
   return (
     <div className={classes.container}>
@@ -15,10 +16,10 @@ function ClickableIconWithCount({ count, iconSrc, onClick }) {
             onClick();
           }}
         >
-          <img className={classes.icon} src={iconSrc} style={iconStyle} />
+          <FileToInlineSvg path={iconSrc} style={iconStyle} />
         </button>
       ) : (
-        <img className={classes.icon} src={iconSrc} style={iconStyle} />
+        <FileToInlineSvg path={iconSrc} style={iconStyle} />
       )}
     </div>
   );
