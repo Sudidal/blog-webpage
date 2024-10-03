@@ -1,29 +1,35 @@
 import PropTypes from "prop-types";
+import { useEffect } from "react";
 import classes from "./msgCard.module.css";
 
 function MsgCard({ msg, onRemove }) {
-  let content = "";
+  const durationMs = 5000;
 
-  if (typeof msg === "object") {
-    if (msg.msg) {
-      content = msg.msg;
-    } else if (msg.message) {
-      content = msg.mesasge;
-    }
-  } else if (typeof msg === "string") {
-    content = msg;
-  }
+  useEffect(() => {
+    const id = setTimeout(() => {
+      onRemove(msg);
+    }, durationMs);
+    return () => {
+      clearTimeout(id);
+    };
+  }, [msg, onRemove]);
 
   return (
     <div className={classes.card}>
-      <p>{content}</p>
-      <button onClick={() => {onRemove(msg)}}>X</button>
+      <p>{msg.text}</p>
+      <button
+        onClick={() => {
+          onRemove(msg);
+        }}
+      >
+        X
+      </button>
     </div>
   );
 }
 
 MsgCard.propTypes = {
-  msg: PropTypes.any,
+  msg: PropTypes.object,
   onRemove: PropTypes.func,
 };
 

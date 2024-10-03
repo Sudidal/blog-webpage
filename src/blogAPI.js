@@ -22,8 +22,7 @@ class BlogAPI {
     if (res.ok) {
       return true;
     } else {
-      const data = await res.json();
-      this.#addUUIDToMsgs(data);
+      const data = await this.#formatResMsgs(res);
       return data;
     }
   }
@@ -39,7 +38,7 @@ class BlogAPI {
       storageManager.setAuthToken(data.jwtToken);
       return true;
     } else {
-      const data = await res.json();
+      const data = await this.#formatResMsgs(res);
       return data;
     }
   }
@@ -74,7 +73,7 @@ class BlogAPI {
       this.#addIsPublished(postsObj.posts);
       return postsObj.posts;
     } else {
-      const data = await res.json();
+      const data = await this.#formatResMsgs(res);
       return data;
     }
   }
@@ -89,7 +88,7 @@ class BlogAPI {
       this.#addIsPublished(postsObj.post);
       return postsObj.post;
     } else {
-      const data = await res.json();
+      const data = await this.#formatResMsgs(res);
       return data;
     }
   }
@@ -103,7 +102,7 @@ class BlogAPI {
       const commentObj = await res.json();
       return commentObj.comment;
     } else {
-      const data = await res.json();
+      const data = await this.#formatResMsgs(res);
       return data;
     }
   }
@@ -118,7 +117,7 @@ class BlogAPI {
     if (res.ok) {
       return true;
     } else {
-      const data = await res.json();
+      const data = await this.#formatResMsgs(res);
       return data;
     }
   };
@@ -132,7 +131,7 @@ class BlogAPI {
     if (res.ok) {
       return true;
     } else {
-      const data = await res.json();
+      const data = await this.#formatResMsgs(res);
       return data;
     }
   }
@@ -150,7 +149,7 @@ class BlogAPI {
     if (res.ok) {
       return true;
     } else {
-      const data = await res.json();
+      const data = await this.#formatResMsgs(res);
       return data;
     }
   };
@@ -166,7 +165,7 @@ class BlogAPI {
     if (res.ok) {
       return true;
     } else {
-      const data = await res.json();
+      const data = await this.#formatResMsgs(res);
       return data;
     }
   };
@@ -179,7 +178,7 @@ class BlogAPI {
     if (res.ok) {
       return true;
     } else {
-      const data = await res.json();
+      const data = await this.#formatResMsgs(res);
       return data;
     }
   };
@@ -192,7 +191,7 @@ class BlogAPI {
     if (res.ok) {
       return true;
     } else {
-      const data = await res.json();
+      const data = await this.#formatResMsgs(res);
       return data;
     }
   };
@@ -205,7 +204,7 @@ class BlogAPI {
     if (res.ok) {
       return true;
     } else {
-      const data = await res.json();
+      const data = await this.#formatResMsgs(res);
       return data;
     }
   };
@@ -218,7 +217,7 @@ class BlogAPI {
     if (res.ok) {
       return true;
     } else {
-      const data = await res.json();
+      const data = await this.#formatResMsgs(res);
       return data;
     }
   };
@@ -233,10 +232,34 @@ class BlogAPI {
     }
   }
 
-  #addUUIDToMsgs(obj) {
-    obj.errors.forEach((err) => {
-      err.id = uuidv4();
+  async #formatResMsgs(res) {
+    const obj = await res.json();
+
+    if (!Array.isArray(obj.errors)) {
+      obj.errors = [obj.errors];
+    }
+
+    const newMsgsArr = new Array(obj.errors.length);
+    obj.errors.forEach((msg) => {
+      const newMsg = { text: "", id: 0 };
+      let content = "";
+      if (typeof msg === "string") {
+        content = msg;
+      } else if (typeof msg === "object") {
+        if (msg.message) {
+          content = msg.message;
+        } else if (msg.msg) {
+          content = msg.msg;
+        }
+      }
+
+      newMsg.text = content;
+      newMsg.id = uuidv4();
+      newMsgsArr.push(newMsg);
     });
+
+    obj.errors = newMsgsArr;
+    return obj;
   }
 
   isAdmin(user) {
