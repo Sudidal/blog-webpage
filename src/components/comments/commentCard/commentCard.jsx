@@ -4,6 +4,7 @@ import { useState } from "react";
 import CommentForm from "../commentForm/commentForm.jsx";
 import IconButtonWithCount from "../../iconButtonWithCount/iconButtonWithCount.jsx";
 import IconButton from "../../iconButton/iconButton.jsx";
+import PrettyDate from "../../prettyDate/prettyDate.jsx";
 
 function CommentCard({ comment, onLike, onEdit, onDelete }) {
   const [edit, setEdit] = useState(false);
@@ -31,6 +32,7 @@ function CommentCard({ comment, onLike, onEdit, onDelete }) {
       ) : (
         <>
           <em>By: {comment.user.username}</em>
+          <PrettyDate isoString={comment.publishDate} />
           <p>{comment.content}</p>
           <IconButtonWithCount
             iconSrc={"/heart.svg"}
