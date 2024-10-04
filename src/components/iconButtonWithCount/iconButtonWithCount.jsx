@@ -1,5 +1,5 @@
 import PropTypes from "prop-types"
-import ClickableIconWithCount from "../counterWithIcon/clickableIconWithCount.jsx"
+import ClickableIconWithCount from "../clickableIconWithCount/clickableIconWithCount.jsx"
 
 function IconButtonWithCount({iconSrc, count, onClick}) {
   return (

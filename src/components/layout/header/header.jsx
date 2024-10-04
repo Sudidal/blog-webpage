@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { userContext } from "../../../contexts/userContext.jsx";
 import { Link } from "react-router-dom";
 import classes from "./header.module.css";
+import ThemeSwitch from "../../themeSwitch/themeSwitch.jsx";
 
 function Header({logout}) {
   const user = useContext(userContext);
@@ -17,6 +18,7 @@ function Header({logout}) {
           {user && <em>Welcome, {user.username}</em>}
         </div>
         <div className={classes.right}>
+          <ThemeSwitch />
           <button onClick={logout}>Log Out</button>
           <Link to={"/posts/new"} className="button-link">
             +

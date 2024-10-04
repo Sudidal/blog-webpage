@@ -19,17 +19,24 @@ body {
 
   --padding-sides: 10px;
 
-  /* currently applied variables */
-  --background-color: var(--background-color-light);
-  --secondary-background-color: var(--secondary-background-color-light);
-  --color: var(--color-light);
-  --low-color: var(--low-color-light);
-
   /* rules */
   background-color: var(--background-color);
   margin: 0;
   padding: 0;
   color: var(--color);
+}
+
+body, body.light {
+  --background-color: var(--background-color-light);
+  --secondary-background-color: var(--secondary-background-color-light);
+  --color: var(--color-light);
+  --low-color: var(--low-color-light);
+}
+body.dark {
+  --background-color: var(--background-color-dark);
+  --secondary-background-color: var(--secondary-background-color-dark);
+  --color: var(--color-dark);
+  --low-color: var(--low-color-dark);
 }
 
 em {
@@ -61,13 +68,4 @@ button,
 .unstyled-link {
   text-decoration: none;
   color: var(--color);
-}
-
-@media (prefers-color-scheme: dark) {
-  body {
-    --background-color: var(--background-color-dark);
-    --secondary-background-color: var(--secondary-background-color-dark);
-    --color: var(--color-dark);
-    --low-color: var(--low-color-dark);
-  }
 }
