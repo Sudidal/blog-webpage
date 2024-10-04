@@ -1,15 +1,31 @@
+@property --header-background-color {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: black;
+}
+@property --header-color {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: black;
+}
+
 .header {
   margin-bottom: 20px;
   padding-left: 10px;
   padding-right: 10px;
   height: 70px;
-  background-color: rgb(61, 61, 61);
-  color: white;
+  
+  --header-background-color: var(--secondary-background-color);
+  --header-color: var(--color);
+  background-color: var(--header-background-color);
+  color: var(--header-color);
+  transition-property: --header-background-color, --header-color;
+  transition-duration: 1s;
 }
 
 .header *{
-  color: white;
-  border-color: white;
+  color: var(--header-color);
+  border-color: var(--header-color);
 }
 
 .header nav,

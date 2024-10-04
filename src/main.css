@@ -3,6 +3,27 @@
   font-family: sans-serif;
 }
 
+@property --background-color {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: black;
+}
+@property --secondary-background-color {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: black;
+}
+@property --color {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: black;
+}
+@property --low-color {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: black;
+}
+
 body {
   /* dark and light variables */
   --background-color-light: white;
@@ -24,7 +45,11 @@ body {
   margin: 0;
   padding: 0;
   color: var(--color);
+  transition-property: --background-color --secondary-background-color --color --low-color;
+  transition-duration: 1s;
 }
+
+
 
 body, body.light {
   --background-color: var(--background-color-light);
