@@ -13,11 +13,5 @@
   transition: --color 1s;
 }
 .btn {
-  padding: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
   color: var(--icon-color);
-  border-color: var(--icon-color);
 }
