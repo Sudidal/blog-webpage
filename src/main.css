@@ -8,6 +8,9 @@ body {
   --background-color-light: white;
   --background-color-dark: rgb(43, 42, 51);
 
+  --secondary-background-color-light: rgb(190, 184, 184);
+  --secondary-background-color-dark: rgb(44, 42, 42);
+
   --color-light: black;
   --color-dark: white;
 
@@ -18,6 +21,7 @@ body {
 
   /* currently applied variables */
   --background-color: var(--background-color-light);
+  --secondary-background-color: var(--secondary-background-color-light);
   --color: var(--color-light);
   --low-color: var(--low-color-light);
 
@@ -36,12 +40,6 @@ em {
 .content {
   padding-right: var(--padding-sides);
   padding-left: var(--padding-sides);
-}
-
-.svg-icon {
-  display: flex;
-  fill: var(--color);
-  stroke: var(--color);
 }
 
 button,
@@ -68,6 +66,7 @@ button,
 @media (prefers-color-scheme: dark) {
   body {
     --background-color: var(--background-color-dark);
+    --secondary-background-color: var(--secondary-background-color-dark);
     --color: var(--color-dark);
     --low-color: var(--low-color-dark);
   }

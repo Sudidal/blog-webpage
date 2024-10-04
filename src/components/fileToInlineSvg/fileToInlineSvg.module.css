@@ -1,0 +1,5 @@
+.svg {
+  display: flex;
+  fill: var(--color);
+  stroke: var(--color);
+}

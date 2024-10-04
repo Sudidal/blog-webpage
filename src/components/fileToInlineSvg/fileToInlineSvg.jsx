@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import classes from "./fileToInlineSvg.module.css"
 
 function FileToInlineSvg({ path, style }) {
   let fileName = path.split(".")[0];
@@ -7,7 +8,7 @@ function FileToInlineSvg({ path, style }) {
   }
 
   return (
-    <div className="svg-icon">
+    <div className={classes.svg}>
       <svg id="svg" style={style}>
         <use href={`${path}#${fileName}`}></use>
       </svg>
