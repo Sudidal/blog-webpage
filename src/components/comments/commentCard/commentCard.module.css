@@ -7,10 +7,15 @@
     2px 2px 8px rgba(0, 0, 0, 0.3), 2px 2px 5px rgba(0, 0, 0, 0.2) inset;
 }
 
+.top,
 .bottom,
 .left,
 .right {
   display: flex;
+}
+
+.top {
+  gap: 10px;
 }
 
 .bottom {

@@ -11,8 +11,7 @@
 
 .header {
   margin-bottom: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 0 var(--padding-sides) 0 var(--padding-sides);
   height: 70px;
   
   --header-background-color: var(--secondary-background-color);
@@ -39,7 +38,7 @@
   justify-content: space-between;
 }
 
-.left {
+.right {
   gap: 10px;
 }
 .left em {

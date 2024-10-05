@@ -15,10 +15,12 @@ function PostCard({ post, onDelete }) {
         navigate("/posts/" + post.id);
       }}
     >
-      <em>By: {post.author.username}</em>
-      <PrettyDate isoString={post.publishDate}></PrettyDate>
+      <div className={classes.top}>
+        <em>By: {post.author.username}</em>
+        <PrettyDate isoString={post.publishDate}></PrettyDate>
+      </div>
       <p>{post.title}</p>
-      <div className={classes.bottomSide}>
+      <div className={classes.bottom}>
         <div className={classes.left}>
           <IconWithCount
             iconSrc={"/comment.svg"}

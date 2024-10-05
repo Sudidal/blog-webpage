@@ -31,8 +31,10 @@ function CommentCard({ comment, onLike, onEdit, onDelete }) {
         </>
       ) : (
         <>
-          <em>By: {comment.user.username}</em>
-          <PrettyDate isoString={comment.publishDate} />
+          <div className={classes.top}>
+            <em>By: {comment.user.username}</em>
+            <PrettyDate isoString={comment.publishDate} />
+          </div>
           <p>{comment.content}</p>
           <div className={classes.bottom}>
             <div className={classes.left}>
