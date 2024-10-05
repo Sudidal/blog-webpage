@@ -82,6 +82,7 @@ button,
 
   margin: 5px;
   padding: 7px;
+  min-height: 30px;
   aspect-ratio: 1 / 1;
 
   font-size: 13px;

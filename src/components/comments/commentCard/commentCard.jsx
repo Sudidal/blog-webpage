@@ -22,7 +22,7 @@ function CommentCard({ comment, onLike, onEdit, onDelete }) {
         <>
           <CommentForm
             onSubmit={(content) => {
-              stopEdit()
+              stopEdit();
               onEdit(content, comment.id);
             }}
             values={{ content: comment.content }}
@@ -34,29 +34,35 @@ function CommentCard({ comment, onLike, onEdit, onDelete }) {
           <em>By: {comment.user.username}</em>
           <PrettyDate isoString={comment.publishDate} />
           <p>{comment.content}</p>
-          <IconButtonWithCount
-            iconSrc={"/heart.svg"}
-            count={comment.likes}
-            onClick={() => {
-              onLike(comment.id);
-            }}
-          />
-          {comment.deletableByUser && (
-            <IconButton
-              iconSrc={"/delete.svg"}
-              onClick={() => {
-                onDelete(comment.id);
-              }}
-            />
-          )}
-          {comment.editableByUser && (
-            <IconButton
-              iconSrc={"/edit.svg"}
-              onClick={() => {
-                startEdit();
-              }}
-            />
-          )}
+          <div className={classes.bottom}>
+            <div className={classes.left}>
+              <IconButtonWithCount
+                iconSrc={"/heart.svg"}
+                count={comment.likes}
+                onClick={() => {
+                  onLike(comment.id);
+                }}
+              />
+            </div>
+            <div className={classes.left}>
+              {comment.deletableByUser && (
+                <IconButton
+                  iconSrc={"/delete.svg"}
+                  onClick={() => {
+                    onDelete(comment.id);
+                  }}
+                />
+              )}
+              {comment.editableByUser && (
+                <IconButton
+                  iconSrc={"/edit.svg"}
+                  onClick={() => {
+                    startEdit();
+                  }}
+                />
+              )}
+            </div>
+          </div>
         </>
       )}
     </div>
