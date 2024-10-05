@@ -36,7 +36,7 @@ function EditPost() {
   return (
     post &&
     <div>
-      <h3>Editing an existing post</h3>
+      <h3>Editing Post</h3>
       <PostEditor values={values} onSubmit={onSubmit} postId={post.id} />
     </div>
   )

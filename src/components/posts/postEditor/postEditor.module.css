@@ -1,12 +1,18 @@
 .form {
   display: flex;
   flex-direction: column;
+  gap: 20px;
 }
 
 .form .field {
   width: 50vw;
+  display: flex;
+  gap: 20px;
 }
-
-.form button {
-  width: 100px;
+.field input, .field textarea {
+  min-width: 300px;
+}
+.field textarea {
+  width: 500px;
+  height: 250px;
 }

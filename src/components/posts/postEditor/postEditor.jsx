@@ -16,17 +16,14 @@ function PostEditor({
           ev.preventDefault();
           onSubmit(
             {
-              title: ev.target["1"].value,
-              content: ev.target["2"].value,
-              publish: ev.target["0"].checked,
+              title: ev.target["0"].value,
+              content: ev.target["1"].value,
+              publish: ev.target["2"].checked,
             },
             postId
           );
         }}
       >
-        <div className={classes.field}>
-          <PrettyCheckbox name="publish" defaultVal={values.isPublished} />
-        </div>
         <div className={classes.field}>
           <input
             type="text"
@@ -42,7 +39,11 @@ function PostEditor({
             defaultValue={values.content}
           ></textarea>
         </div>
-        <TextualButton text={"post"} />
+        <div className={classes.field}>
+          <p className="small-text">Publish post</p>
+          <PrettyCheckbox name="publish" defaultVal={values.isPublished} />
+        </div>
+        <TextualButton text={"Create Post"} />
       </form>
     </div>
   );

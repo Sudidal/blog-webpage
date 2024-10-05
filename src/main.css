@@ -146,7 +146,7 @@ button,
   border-radius: 8px;
   aspect-ratio: 2 / 1;
   padding: 8px 12px 8px 12px;
-  max-width: min-content;
+  max-width: fit-content;
 }
 
 .unstyled-link {
