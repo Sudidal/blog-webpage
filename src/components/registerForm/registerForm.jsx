@@ -17,6 +17,7 @@ function RegisterForm({ onSubmit }) {
         });
       }}
     >
+      <legend>Create New Account</legend>
       <div className={classes.field}>
         <label className="small-text" htmlFor="username">
           Username

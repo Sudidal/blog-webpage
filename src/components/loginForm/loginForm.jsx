@@ -12,6 +12,7 @@ function LoginForm({ onSubmit }) {
         onSubmit(ev.target["0"].value, ev.target["1"].value);
       }}
     >
+      <legend>Login</legend>
       <div className={classes.field}>
       <label className="small-text" htmlFor="username">Username</label>
         <input type="text" name="username" placeholder="Enter username" />

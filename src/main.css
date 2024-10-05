@@ -93,8 +93,7 @@ em {
 }
 
 .content {
-  padding-right: var(--padding-sides);
-  padding-left: var(--padding-sides);
+  padding: var(--padding-sides);
 }
 
 .clickable {

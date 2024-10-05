@@ -10,7 +10,6 @@
 }
 
 .header {
-  margin-bottom: 20px;
   padding: 0 var(--padding-sides) 0 var(--padding-sides);
   height: 70px;
   

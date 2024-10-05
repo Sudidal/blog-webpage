@@ -14,6 +14,7 @@ function PostsList({ posts, onPostDelete }) {
   
   return (
     <div className={classes.postsList}>
+      <h3>Latest Posts</h3>
       {posts.map((post) => {
         return <PostCard key={post.id} post={post} onDelete={deletePost} />;
       })}
