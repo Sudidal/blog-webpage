@@ -74,6 +74,10 @@ em {
   padding-left: var(--padding-sides);
 }
 
+.clickable {
+  cursor: pointer;
+}
+
 button,
 .button-link {
   display: flex;
