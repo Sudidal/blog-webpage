@@ -2,6 +2,7 @@ import blogApi from "../blogAPI.js";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { setMsgsContext } from "../contexts/mgsContext.jsx";
+import LoginForm from "../components/loginForm/loginForm.jsx";
 
 function Login() {
   const setErrMsg = useContext(setMsgsContext)
@@ -19,16 +20,7 @@ function Login() {
   }
 
   return (
-    <form
-      onSubmit={(ev) => {
-        ev.preventDefault();
-        onSubmit(ev.target["0"].value, ev.target["1"].value);
-      }}
-    >
-      <input type="text" name="username" placeholder="username" />
-      <input type="password" name="password" placeholder="password" />
-      <button type="submit">Login</button>
-    </form>
+    <LoginForm onSubmit={onSubmit} />
   );
 }
 
