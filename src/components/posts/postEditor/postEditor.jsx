@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import classes from "./postEditor.module.css";
+import PrettyCheckbox from "../../prettyCheckbox/prettyCheckbox.jsx";
 import TextualButton from "../../textualButton/textualButton.jsx";
 
 function PostEditor({
@@ -24,11 +25,7 @@ function PostEditor({
         }}
       >
         <div className={classes.field}>
-          <input
-            type="checkbox"
-            name="publish"
-            defaultChecked={values.isPublished}
-          />
+          <PrettyCheckbox name="publish" defaultVal={values.isPublished} />
         </div>
         <div className={classes.field}>
           <input
