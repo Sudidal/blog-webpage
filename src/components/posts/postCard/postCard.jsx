@@ -17,7 +17,9 @@ function PostCard({ post, onDelete }) {
     >
       <div className={classes.top}>
         <em>By: {post.author.username}</em>
-        <PrettyDate isoString={post.publishDate}></PrettyDate>
+        <em>
+          <PrettyDate isoString={post.publishDate}></PrettyDate>
+        </em>
       </div>
       <p>{post.title}</p>
       <div className={classes.bottom}>

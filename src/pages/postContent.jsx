@@ -4,6 +4,7 @@ import { useEffect, useState, useContext } from "react";
 import { setMsgsContext } from "../contexts/mgsContext.jsx";
 import CommentSection from "../components/comments/commentSection/commentSection.jsx";
 import IconButtonWithCount from "../components/iconButtonWithCount/iconButtonWithCount.jsx";
+import PrettyDate from "../components/prettyDate/prettyDate.jsx";
 
 function PostContent() {
   const setErrMsgs = useContext(setMsgsContext)
@@ -36,7 +37,12 @@ function PostContent() {
   return (
     post && (
       <div>
-        <p>{post.content}</p>
+        <h1>{post.title}</h1>
+        <p className="small-text">Authored By: {post.author.username}</p>
+        <br />
+        <p className="small-text"><PrettyDate isoString={post.publishDate} /></p>
+        <hr />
+        <p className="big-text">{post.content}</p>
         <IconButtonWithCount
           iconSrc="/heart.svg"
           count={post.likes}

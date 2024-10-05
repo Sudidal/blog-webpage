@@ -9,22 +9,17 @@ function ThemeSwitch() {
     setInitialTheme();
   }, []);
 
-  console.log("that led me to a new verse")
-  console.log(storageManager.getItem("dark"), dark)
 
   let icon = "";
   if (dark) {
-    console.log("where the theme is dark")
     icon = "/sun.svg";
     document.body.classList.add("dark");
   } else {
-    console.log("where the theme is light")
     icon = "/crescent-moon.svg";
     document.body.classList.remove("dark");
   }
 
   function saveTheme(value) {
-    console.log("lets use it")
     storageManager.setItem("dark", value);
     setDark(value);
   }
@@ -34,13 +29,11 @@ function ThemeSwitch() {
   }
 
   function setInitialTheme() {
-    console.log("init theme");
     const storedTheme = storageManager.getItem("dark");
     if (storedTheme === null) {
       const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
       setDark(prefersDark);
     } else {
-      console.log("looks like it is there")
       saveTheme(storedTheme);
     }
   }

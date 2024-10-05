@@ -1,16 +1,14 @@
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
 
-function PrettyDate({isoString}) {
-  const date = new Date(isoString)
-  const formatted = date.toLocaleDateString() + " " + date.toLocaleTimeString()
+function PrettyDate({ isoString }) {
+  const date = new Date(isoString);
+  const formatted = date.toLocaleDateString() + " " + date.toLocaleTimeString();
 
-  return (
-    <em>{formatted}</em>
-  )
+  return <>{formatted}</>;
 }
 
 PrettyDate.propTypes = {
-  isoString: PropTypes.string
-}
+  isoString: PropTypes.string,
+};
 
-export default PrettyDate
+export default PrettyDate;
