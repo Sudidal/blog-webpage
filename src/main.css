@@ -105,6 +105,13 @@ button,
   cursor: pointer;
 }
 
+.textual-btn {
+  border-radius: 8px;
+  aspect-ratio: 2 / 1;
+  padding: 8px 12px 8px 12px;
+  max-width: min-content;
+}
+
 .unstyled-link {
   text-decoration: none;
   color: var(--color);

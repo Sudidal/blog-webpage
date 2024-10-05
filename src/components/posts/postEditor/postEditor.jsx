@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import classes from "./postEditor.module.css";
+import TextualButton from "../../textualButton/textualButton.jsx";
 
 function PostEditor({
   values = { title: "", content: "", isPublished: "" },
@@ -44,7 +45,7 @@ function PostEditor({
             defaultValue={values.content}
           ></textarea>
         </div>
-        <button type="submit">Post</button>
+        <TextualButton text={"post"} />
       </form>
     </div>
   );
