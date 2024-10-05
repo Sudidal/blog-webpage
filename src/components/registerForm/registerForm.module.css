@@ -1,0 +1,14 @@
+.form {
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.form .field {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+}
