@@ -10,12 +10,12 @@ import { updateContext } from "../../../contexts/updateContext.jsx";
 function Header() {
   const user = useContext(userContext);
   const updateApp = useContext(updateContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   function logout() {
     blogApi.logout().then((res) => {
       if (res === true) {
-        updateApp()
+        updateApp();
         navigate("/");
       }
     });
@@ -33,7 +33,15 @@ function Header() {
           {user && <em>Welcome, {user.username}</em>}
         </div>
         <div className={classes.right}>
-          <IconButton iconSrc={"/write.svg"} onClick={() => {navigate("/posts/new")}} />
+          {blogApi.isAuthor(user) ||
+            (blogApi.isAdmin(user) && (
+              <IconButton
+                iconSrc={"/write.svg"}
+                onClick={() => {
+                  navigate("/posts/new");
+                }}
+              />
+            ))}
           <ThemeSwitch />
           {user && <IconButton iconSrc={"/logout.svg"} onClick={logout} />}
         </div>
