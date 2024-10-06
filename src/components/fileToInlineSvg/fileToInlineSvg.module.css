@@ -2,5 +2,4 @@
   display: flex;
   fill: var(--color);
   stroke: var(--color);
-  aspect-ratio: 1 / 1;
 }

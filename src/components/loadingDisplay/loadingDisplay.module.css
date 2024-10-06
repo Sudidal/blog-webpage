@@ -1,0 +1,18 @@
+.loading {
+  display: flex;
+  align-items: center;
+  gap: 40px
+}
+
+.rotate {
+  animation: rotate 1s infinite linear;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotateZ(0deg);
+  }
+  to {
+    transform: rotateZ(360deg);
+  }
+}

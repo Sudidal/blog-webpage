@@ -17,7 +17,7 @@ function PrettyCheckbox({ name, defaultVal = false}) {
   return (
     <div>
       <div className={`${classes.checkbox} input`} onClick={toggleChecked}>
-        {checked && <FileToInlineSvg path="/check.svg" />}
+        {checked && <FileToInlineSvg path="/check.svg" style={{width: "20px", height: "20px"}} />}
       </div>
       <input type="checkbox" name={name} id={name} checked={checked} readOnly hidden />
     </div>

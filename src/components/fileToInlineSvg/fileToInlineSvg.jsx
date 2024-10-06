@@ -8,8 +8,8 @@ function FileToInlineSvg({ path, style }) {
   }
 
   return (
-    <div className={classes.svg}>
-      <svg id="svg" style={style}>
+    <div className={classes.svg} style={style}>
+      <svg id="svg">
         <use href={`${path}#${fileName}`}></use>
       </svg>
     </div>

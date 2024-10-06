@@ -3,13 +3,18 @@ import PropTypes from "prop-types";
 import classes from "./commentsList.module.css"
 
 function CommentsList({ comments, onLike, onEdit, onDelete }) {
-  return (
-    <div className={classes.commentsList}>
-      {comments.map((comment) => {
-        return <CommentCard key={comment.id} comment={comment} onLike={onLike} onDelete={onDelete} onEdit={onEdit} />;
-      })}
-    </div>
-  );
+  if(comments?.length > 0) {
+    return (
+      <div className={classes.commentsList}>
+        {comments.map((comment) => {
+          return <CommentCard key={comment.id} comment={comment} onLike={onLike} onDelete={onDelete} onEdit={onEdit} />;
+        })}
+      </div>
+    );
+  }
+  else {
+    return <p>No comments yet, Be first to make one!</p>
+  }
 }
 
 CommentsList.propTypes = {

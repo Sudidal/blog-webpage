@@ -223,6 +223,7 @@ class BlogAPI {
   };
 
   #addIsPublished(input) {
+    if (!input) return;
     if (Array.isArray(input)) {
       input.forEach((item) => {
         item.isPublished = item.postStatus === "PUBLISHED";
@@ -233,6 +234,7 @@ class BlogAPI {
   }
 
   async #formatResMsgs(res) {
+    if (!res) return;
     const obj = await res.json();
     console.log(Object.assign(obj));
 

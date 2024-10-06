@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { userContext } from "./contexts/userContext.jsx";
 import { setMsgsContext } from "./contexts/mgsContext.jsx";
 import { updateContext } from "./contexts/updateContext.jsx";
+import { ScrollRestoration } from "react-router-dom";
 import MessagesContainer from "./components/messgesContainer/messgesContainer.jsx";
 import Header from "./components/layout/header/header.jsx";
 
@@ -17,7 +18,6 @@ function App() {
 
   useEffect(() => {
     blogApi.getUserInfo().then((res) => {
-      console.log(res)
       setUser(res);
     });
   }, [update]);
@@ -42,6 +42,7 @@ function App() {
       <setMsgsContext.Provider value={addMsgs}>
         <updateContext.Provider value={updateComponent}>
           <div>
+          <ScrollRestoration />
             <Header />
             <main className="content">
               <MessagesContainer messages={msgs} onMsgRemove={removeMsg} />

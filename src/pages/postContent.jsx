@@ -5,17 +5,26 @@ import { setMsgsContext } from "../contexts/mgsContext.jsx";
 import CommentSection from "../components/comments/commentSection/commentSection.jsx";
 import IconButtonWithCount from "../components/iconButtonWithCount/iconButtonWithCount.jsx";
 import PrettyDate from "../components/prettyDate/prettyDate.jsx";
+import LoadingDisplay from "../components/loadingDisplay/loadingDisplay.jsx";
 
 function PostContent() {
-  const setErrMsgs = useContext(setMsgsContext)
+  const setErrMsgs = useContext(setMsgsContext);
 
   const [update, setUpdate] = useState(false);
   const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(null);
+  const [error, setError] = useState(null);
   const params = useParams();
 
   useEffect(() => {
+    setLoading(true);
     blogApi.getPost(params.postId).then((res) => {
-      setPost(res);
+      setLoading(false);
+      if (res) {
+        setPost(res);
+      } else {
+        setError(true);
+      }
     });
   }, [params.postId, update]);
 
@@ -23,9 +32,8 @@ function PostContent() {
     blogApi.likePost(post.id).then((res) => {
       if (res === true) {
         updateComponent();
-      }
-      else {
-        setErrMsgs(res.errors)
+      } else {
+        setErrMsgs(res.errors);
       }
     });
   }
@@ -34,30 +42,40 @@ function PostContent() {
     setUpdate(!update);
   }
 
-  return (
-    post && (
-      <div>
-        <h1>{post.title}</h1>
-        <p className="small-text">Authored By: {post.author.username}</p>
-        <br />
-        <p className="small-text"><PrettyDate isoString={post.publishDate} /></p>
-        <hr />
-        <p className="big-text">{post.content}</p>
-        <IconButtonWithCount
-          iconSrc="/heart.svg"
-          count={post.likes}
-          onClick={likeThePost}
-        />
-        <CommentSection
-          post={post}
-          onCommentPost={updateComponent}
-          onCommentLike={updateComponent}
-          onCommentEdit={updateComponent}
-          onCommentDelete={updateComponent}
-        />
-      </div>
-    )
-  );
+  if (loading) {
+    return <LoadingDisplay />;
+  } else if (error) {
+    return <p>An Error has occured</p>;
+  } else if (post) {
+    return (
+      post && (
+        <div>
+          <h1>{post.title}</h1>
+          <p className="small-text">Authored By: {post.author.username}</p>
+          <br />
+          <p className="small-text">
+            <PrettyDate isoString={post.publishDate} />
+          </p>
+          <hr />
+          <p className="big-text">{post.content}</p>
+          <IconButtonWithCount
+            iconSrc="/heart.svg"
+            count={post.likes}
+            onClick={likeThePost}
+          />
+          <CommentSection
+            post={post}
+            onCommentPost={updateComponent}
+            onCommentLike={updateComponent}
+            onCommentEdit={updateComponent}
+            onCommentDelete={updateComponent}
+          />
+        </div>
+      )
+    );
+  } else {
+    <p>Nothing to show here</p>;
+  }
 }
 
 export default PostContent;
