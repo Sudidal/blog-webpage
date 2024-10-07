@@ -3,7 +3,7 @@ import storageManager from "./storageManager.js";
 import { v4 as uuidv4 } from "uuid";
 
 class BlogAPI {
-  #API_URL = "http://localhost:4000";
+  #API_URL = import.meta.env.VITE_API_URL;
   #ADMIN_ROLE_NAME = "ADMIN";
   #AUTHOR_ROLE_NAME = "AUTHOR";
   constructor() {}
