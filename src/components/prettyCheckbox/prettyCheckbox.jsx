@@ -3,7 +3,9 @@ import { useState, useEffect } from "react";
 import FileToInlineSvg from "../fileToInlineSvg/fileToInlineSvg.jsx";
 import classes from "./prettyCheckbox.module.css";
 
-function PrettyCheckbox({ name, defaultVal = false}) {
+function PrettyCheckbox({ name, defaultVal = false, retrieveFunc}) {
+  retrieveFunc.current = () => checked
+  
   const [checked, setChecked] = useState(false)
 
   useEffect(() => {
@@ -27,6 +29,7 @@ function PrettyCheckbox({ name, defaultVal = false}) {
 PrettyCheckbox.propTypes = {
   name: PropTypes.string,
   defaultVal: PropTypes.any,
+  retrieveFunc: PropTypes.any,
 };
 
 export default PrettyCheckbox;

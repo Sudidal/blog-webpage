@@ -12,6 +12,7 @@ function PostEditor({
   onSubmit,
 }) {
   const editorRef = useRef();
+  const isPublish = useRef(() => {})
   const isDarkTheme = storageManager.getItem("dark");
 
   return (
@@ -24,7 +25,7 @@ function PostEditor({
             {
               title: ev.target["0"].value,
               content: editorRef.current.getContent(),
-              publish: ev.target["2"].checked,
+              publish: isPublish.current(),
             },
             postId
           );
@@ -84,7 +85,7 @@ function PostEditor({
         </div>
         <div className={classes.field}>
           <p className="small-text">Publish post</p>
-          <PrettyCheckbox name="publish" defaultVal={values.isPublished} />
+          <PrettyCheckbox retrieveFunc={isPublish} name="publish" defaultVal={values.isPublished} />
         </div>
         <TextualButton text={"Create Post"} />
       </form>
