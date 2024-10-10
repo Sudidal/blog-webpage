@@ -2,6 +2,7 @@ import blogApi from "../blogAPI.js";
 import { useParams } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import { setMsgsContext } from "../contexts/mgsContext.jsx";
+import { toSafeHtml } from "../../utils/toSafeHtml.js";
 import CommentSection from "../components/comments/commentSection/commentSection.jsx";
 import IconButtonWithCount from "../components/iconButtonWithCount/iconButtonWithCount.jsx";
 import PrettyDate from "../components/prettyDate/prettyDate.jsx";
@@ -15,6 +16,8 @@ function PostContent() {
   const [loading, setLoading] = useState(null);
   const [error, setError] = useState(null);
   const params = useParams();
+
+  const safeContent = toSafeHtml(post?.content)
 
   useEffect(() => {
     setLoading(true);
@@ -57,7 +60,7 @@ function PostContent() {
             <PrettyDate isoString={post.publishDate} />
           </p>
           <hr />
-          <p className="big-text">{post.content}</p>
+          <p className="big-text" dangerouslySetInnerHTML={{__html: safeContent}}></p>
           <IconButtonWithCount
             iconSrc="/heart.svg"
             count={post.likes}
