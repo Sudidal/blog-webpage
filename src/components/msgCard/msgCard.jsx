@@ -1,21 +1,32 @@
 import PropTypes from "prop-types";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import classes from "./msgCard.module.css";
 
 function MsgCard({ msg, onRemove }) {
-  const durationMs = 5000;
+  const msgEle = useRef();
+
+  const removeDurationMs = 6000;
+  const animationDurationMs = 4000;
 
   useEffect(() => {
-    const id = setTimeout(() => {
+    const removeId = setTimeout(() => {
       onRemove(msg);
-    }, durationMs);
+    }, removeDurationMs);
+
+    setTimeout(() => {
+      msgEle.current.addEventListener("animationend", () => {
+        msgEle.current.style.display = "none"
+      })
+      msgEle.current.style = "animation: fade 1s forwards"
+    }, animationDurationMs);
+
     return () => {
-      clearTimeout(id);
+      clearTimeout(removeId);
     };
   }, [msg, onRemove]);
 
   return (
-    <div className={classes.card}>
+    <div className={classes.card} ref={msgEle}>
       <p>{msg.text}</p>
       <button
         onClick={() => {

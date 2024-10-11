@@ -152,9 +152,11 @@ button,
   color: var(--color);
 }
 
-
-
-
-#tinymce {
-  background-color: red;
+@keyframes fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
